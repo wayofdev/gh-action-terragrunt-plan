@@ -76,6 +76,46 @@ Don't use terragrunt_download setting in your terragrunt code and also don't cle
   - Optional
   - Default: false
 
+* `create_cache_folder_in_workspace`
+
+  Set to true to create a cache folder in workspace. It can be reused in other steps, jobs and workflows. By default it created in /tmp folder inside docker container and not available outside.
+
+  - Type: boolean
+  - Optional
+  - Default: false
+
+* `cache_folder`
+
+  Specify custom name for the cache folder which will be created in github workspace. Two additional folders will be created inside  `cache_folder`: `tf_plugin_cache_folder` and `tg_cache_folder`
+
+  - Type: string
+  - Optional
+  - Default: .terragrunt-cache
+
+* `use_tf_plugin_cache_folder`
+
+  If set to `true`, the varibale TF_PLUGIN_CACHE_DIR will be enabled. Sometimes there can be problems when using these variable in Terragrunt
+
+  - Type: boolean
+  - Optional
+  - Default: false
+
+* `tf_plugin_cache_folder`
+
+  Specify custom name for the tf_plugin_cache_folder folder which will be created inside `cache_folder`. Variable TF_PLUGIN_CACHE_DIR will be set to `${GITHUB_WORKSPACE}/${cache_folder}/${tf_plugin_cache_folder}`. Only applicable if `use_tf_plugin_cache_folder` is set to true
+
+  - Type: string
+  - Optional
+  - Default: tf-plugin-cache
+
+* `tg_cache_folder`
+
+  Specify custom name for the tg_cache_folder folder which will be created inside `cache_folder`. Terragrunt commands will be executed with option `--terragrunt-download-dir ${GITHUB_WORKSPACE}/${cache_folder}/${tg_cache_folder}`
+
+  - Type: string
+  - Optional
+  - Default: tg-cache
+
 ## Environment Variables
 
 * `GITHUB_TOKEN`

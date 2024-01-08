@@ -31,10 +31,30 @@ inputs:
     description: Create a plan to destroy all resources
     required: false
     default: "false"
+  create_cache_folder_in_workspace:
+    description: "Create a cache folder in the workspace"
+    required: false
+    default: "false"
+  cache_folder:
+    description: "Cache folder name"
+    required: false
+    default: ".terragrunt-cache"
+  use_tf_plugin_cache_folder:
+    description: "If set to true, the variable TF_PLUGIN_CACHE_DIR will be enabled"
+    required: false
+    default: "false"
+  tf_plugin_cache_folder:
+    description: "Cache folder name for Terraform plugins. Only applicable if use_tf_plugin_cache_folder is set to true"
+    required: false
+    default: "tf-plugin-cache"
+  tg_cache_folder:
+    description: "Cache folder name for Terragrunt"
+    required: false
+    default: "tg-cache"
 
 runs:
   using: docker
-  image: docker://ghcr.io/wayofdev/gh-actions-terragrunt@sha256:6013c61d1405b915049a663d40650512d28103fa19b3991d1db55917e8fac012
+  image: docker://ghcr.io/wayofdev/gh-actions-terragrunt@sha256:2601b413e1b661395927266b021f048376526f9b494df66c952c707f098ea026
   entrypoint: /entrypoints/tg_plan_all.sh
 
 branding:
